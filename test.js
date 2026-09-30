@@ -58,11 +58,12 @@ async function main() {
   await recordPurchase("2"); // 3
   const s = await recordPurchase("3"); // 1  (returns new score)
   const top = await getTopProducts(3);
+  const rows = Array.isArray(top) ? top : [];
   console.log("  top 3:", JSON.stringify(top));
   check("recordPurchase returns the new score as a number", s === 1);
-  check("getTopProducts returns an array of {productId, score}", Array.isArray(top) && top.length === 3 && "productId" in top[0] && "score" in top[0]);
-  check("product 2 is ranked #1 with score 3", top[0]?.productId === "2" && top[0]?.score === 3);
-  check("scores are in descending order", top[0]?.score >= top[1]?.score && top[1]?.score >= top[2]?.score);
+  check("getTopProducts returns an array of {productId, score}", rows.length === 3 && rows[0] && "productId" in rows[0] && "score" in rows[0]);
+  check("product 2 is ranked #1 with score 3", rows[0]?.productId === "2" && rows[0]?.score === 3);
+  check("scores are in descending order", rows.length === 3 && rows[0].score >= rows[1].score && rows[1].score >= rows[2].score);
 
   console.log("\nTask 4 — One-time coupon (SET EX + GETDEL)");
   await issueCoupon("SAVE20", 20, 300);
