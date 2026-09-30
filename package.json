@@ -1,0 +1,12 @@
+{
+  "name": "quickshop-redis-mpa",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Module 4 MPA — Redis operations for the QuickShop product API",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "ioredis": "^5.4.1"
+  }
+}
